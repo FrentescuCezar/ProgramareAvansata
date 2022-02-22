@@ -1,6 +1,7 @@
 # ProgramareAvansata
 # Laborator 1
 
+Compulsory (1p)\
   "Display on the screen the message "Hello World!". Run the application. If it works, go to step 2" \
    Am utilizat sout + tab pentru a genera  System.out.println() dupa care am pus mesajul "Hello World" System.out.println("Hello World");\
   "Define an array of strings languages, containing {"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"}"\
