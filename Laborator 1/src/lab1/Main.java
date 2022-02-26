@@ -1,6 +1,7 @@
 package lab1;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,7 +9,8 @@ public class Main {
     public static void main(String[] args) {
         Main lab1 = new Main();
         lab1.compulsory();
-        //lab1.homework();
+        String[] fakeArgs = {"5","4","A","B","C","D","E","F","G","H"};
+        lab1.homework(fakeArgs);
     }
 
     void compulsory(){
@@ -29,13 +31,13 @@ public class Main {
 
         //4.Compute the result obtained after performing the following calculations:
         //multiply n by 3;
-            n *= 3;
+        n *= 3;
         //add the binary number 10101 to the result;
-            n += Integer.parseInt("10101", 2);
+        n += Integer.parseInt("10101", 2);
         //add the hexadecimal number FF to the result;
-            n += Integer.parseInt("FF", 16);
+        n += Integer.parseInt("FF", 16);
         //multiply the result by 6;
-            n *= 6;
+        n *= 6;
         System.out.println(n + "\n");
 
         //5.Compute the sum of the digits in the result obtained in the previous step. This is the new result. While the new result has more than one digit, continue to sum the digits of the result.
@@ -66,49 +68,43 @@ public class Main {
 
         System.out.println("\nWilly-nilly, this semester I will learn " + languages[result]);
     }
-    void homework(){
-        // Let n, p be two integers and C1,...,Cm a set of letters (the alphabet), all given as a command line arguments. Validate the arguments!
-        Scanner cin = new Scanner(System.in);
 
-        System.out.print("Introduce the integer n : ");
+
+
+
+    void homework(String[] args){
+        // Let n, p be two integers and C1,...,Cm a set of letters (the alphabet), all given as a command line arguments. Validate the arguments!
         int n;
-        while (!cin.hasNextInt()) {
-            System.out.print("Invalid int input, try again : ");
-            cin.next();
+        if(args[0].contains(".") || args[0].contains("-") || args[0].matches("[a-zA-Z]+")){
+            System.out.println("The input for the variabile n is invalid");
+            return;
         }
-        n = cin.nextInt();
+        n = Integer.parseInt(args[0]);
 
         int p;
-        System.out.print("Introduce the integer p : ");
-        while (!cin.hasNextInt()) {
-            System.out.print("Invalid int input, try again : ");
-            cin.next();
+        if(args[1].contains(".") || args[1].contains("-") || args[1].matches("[a-zA-Z]+")){
+            System.out.println("The input for the variabile p is invalid");
+            return;
         }
-        p = cin.nextInt();
+        p = Integer.parseInt(args[1]);
 
-        int m;
-        System.out.print("Introduce the length(int) m : ");
-        while (!cin.hasNextInt()) {
-            System.out.print("Invalid int input, try again : ");
-            cin.next();
-        }
-        m = cin.nextInt();
+        String[] alphabet = Arrays.copyOfRange(args, 2, args.length);
 
-        ArrayList<Character> setOfLetters = new ArrayList<Character>();
-        for (int i = 0; i < m; i++) {
-            System.out.print("Introduce the C[" + (i + 1) + "] letter : ");
+        ArrayList<String> setOfLetters = new ArrayList<>();
+        for (int i = 0; i < alphabet.length; i++) {
             boolean letterFound = false;
             do {
-                char letter;
-                letter = cin.next().charAt(0);
-                if (Character.isLetter(letter)) {
+                String letter= alphabet[i];
+                if (Character.isLetter(letter.charAt(0))) {
                     if (setOfLetters.contains((letter)) == false) {
                         setOfLetters.add(letter);
                         letterFound = true;
-                    } else
-                        System.out.print("The letter is already in the set, try again : ");
-                } else
-                    System.out.print("The input is not a letter, try again : ");
+                    }
+                } else{
+                    System.out.print("The input is not a letter, try again ");
+                    return;
+                }
+
             } while (letterFound == false);
         }
 
@@ -127,7 +123,6 @@ public class Main {
         for (int i = 0; i < words.size(); i++)
             System.out.println(words.get(i));
 
-
         //Two words are neighbors if they have a common letter.
         //Create a boolean n x n matrix, representing the adjacency relation of the words.
         //Create a data structure (using arrays) that stores the neighbors of each word. Display this data structure on the screen.
@@ -136,46 +131,67 @@ public class Main {
             StringBuilder copyOfWord = words.get(i);
             for (int j = 0; j < n; j++) {
                 StringBuilder copyOfNextWord = words.get(j);
-
                 boolean areNeighbours = false;
                 for (int t = 0; t < copyOfWord.length() && !areNeighbours; t++) {
                     for (int s = 0; s < copyOfNextWord.length() && !areNeighbours; s++) {
-                        if (copyOfWord.charAt(t) == copyOfNextWord.charAt(s)) {
+                        if (copyOfWord.charAt(t) == copyOfNextWord.charAt(s))
                             areNeighbours = true;
-                        }
                     }
                 }
-
                 if (areNeighbours)
                     adjacency[i][j] = true;
                 else
                     adjacency[i][j] = false;
-
                 areNeighbours = false;
             }
         }
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print(adjacency[i][j]);
+                System.out.print(adjacency[i][j] + " ");
             }
             System.out.println();
         }
         //Implement an efficient algorithm that determines, if possible, a subset of words W1,W2,...,Wk (from the ones that you have generated) such that k ≥ 3 and Wi and Wi+1 are neighbors, for all i in [1..k], where Wk+1=W1.
         //Can you find the largest possible k?
-        int temporaryLargestPossibleK = 0;
-        int largestPossibleK = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
-                if (adjacency[i][j] == true)
+        int temporaryLargestPossibleK = 1;
+        int largestPossibleK = 1;
+
+        for(int i=0;i<(n-1);i++){
+            if(adjacency[i][i+1] == true)
+                temporaryLargestPossibleK++;
+            else{
+                if (temporaryLargestPossibleK > largestPossibleK)
+                    largestPossibleK = temporaryLargestPossibleK;
+                temporaryLargestPossibleK = 1;
+            }
+        }
+        // We need to check again
+        if (temporaryLargestPossibleK > largestPossibleK)
+            largestPossibleK = temporaryLargestPossibleK;
+        temporaryLargestPossibleK=1;
+
+        // The same idea for the case W_k+1 = W_1
+        int lastPos = n-1;
+        boolean ok = true;
+        if(largestPossibleK!=n) {
+            for(int i=0;i<(n-1) && ok;i++)
+            {
+                if(adjacency[lastPos][i] == true)
                     temporaryLargestPossibleK++;
                 else{
                     if (temporaryLargestPossibleK > largestPossibleK)
                         largestPossibleK = temporaryLargestPossibleK;
-                    i = j;
-                    temporaryLargestPossibleK = 0;
+                    else
+                        ok = false;
+                    temporaryLargestPossibleK = 1;
                 }
+                lastPos=i;
             }
         }
+
+        System.out.println("The largest possible k is : " + largestPossibleK);
     }
 }
+
+
