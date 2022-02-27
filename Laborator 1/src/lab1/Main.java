@@ -208,6 +208,10 @@ public class Main {
                 lastPos=i;
             }
         }
+        
+        // We need to check again
+        if (temporaryLargestPossibleK > largestPossibleK)
+            largestPossibleK = temporaryLargestPossibleK;
 
         // We need to check again
         if (temporaryLargestPossibleK > largestPossibleK)
