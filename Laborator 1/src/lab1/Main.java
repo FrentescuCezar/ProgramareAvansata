@@ -1,6 +1,3 @@
-// HOMEWORK AND BONUS ARE NOT FULLY COMPLETE YET
-// HOMEWORK AND BONUS ARE NOT FULLY COMPLETE YET
-// HOMEWORK AND BONUS ARE NOT FULLY COMPLETE YET
 // Frentescu Cezar-Augustin 2A4
 package lab1;
 
@@ -13,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         Main lab1 = new Main();
         lab1.compulsory();
-        String[] fakeArgs = {"5","4","A","B","C","D","E","F","G","H"};
+        String[] fakeArgs = {"10","4","A","B","C","D","E","F","G","H"};
         lab1.homework(fakeArgs);
     }
 
@@ -72,8 +69,6 @@ public class Main {
 
         System.out.println("\nWilly-nilly, this semester I will learn " + languages[result]);
     }
-
-
 
 
     void homework(String[] args){
@@ -156,11 +151,31 @@ public class Main {
             }
             System.out.println();
         }
+        //Create a data structure (using arrays) that stores the neighbors of each word. Display this data structure on the screen.
+        String[] neighbours = new String[n];
+        for(int i=0; i<words.size(); i++){
+            neighbours[i] = "";
+        }
+
+        for(int i=0; i<words.size(); i++){
+            for(int j=0; j<adjacency[i].length; j++){
+                if(adjacency[i][j] == true && i!=j){
+                    neighbours[i] = neighbours[i].concat(words.get(j).toString()).concat(",");
+                }
+            }
+            neighbours[i] = neighbours[i].substring(0,neighbours[i].length()-1); // Removing the last comma
+        }
+
+        for(int i=0; i<neighbours.length;i++){
+            System.out.println("The neighbours for " + words.get(i) + " are : " + neighbours[i]);
+        }
+
+
         //Implement an efficient algorithm that determines, if possible, a subset of words W1,W2,...,Wk (from the ones that you have generated) such that k ≥ 3 and Wi and Wi+1 are neighbors, for all i in [1..k], where Wk+1=W1.
         //Can you find the largest possible k?
         int temporaryLargestPossibleK = 1;
         int largestPossibleK = 1;
-
+        int lastPos = 0;
         for(int i=0;i<(n-1);i++){
             if(adjacency[i][i+1] == true)
                 temporaryLargestPossibleK++;
@@ -169,14 +184,14 @@ public class Main {
                     largestPossibleK = temporaryLargestPossibleK;
                 temporaryLargestPossibleK = 1;
             }
+            lastPos = i+1;
         }
         // We need to check again
         if (temporaryLargestPossibleK > largestPossibleK)
             largestPossibleK = temporaryLargestPossibleK;
-        temporaryLargestPossibleK=1;
 
         // The same idea for the case W_k+1 = W_1
-        int lastPos = n-1;
+
         boolean ok = true;
         if(largestPossibleK!=n) {
             for(int i=0;i<(n-1) && ok;i++)
@@ -193,6 +208,10 @@ public class Main {
                 lastPos=i;
             }
         }
+
+        // We need to check again
+        if (temporaryLargestPossibleK > largestPossibleK)
+            largestPossibleK = temporaryLargestPossibleK;
 
         System.out.println("The largest possible k is : " + largestPossibleK);
     }
