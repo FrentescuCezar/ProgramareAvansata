@@ -213,10 +213,6 @@ public class Main {
         if (temporaryLargestPossibleK > largestPossibleK)
             largestPossibleK = temporaryLargestPossibleK;
 
-        // We need to check again
-        if (temporaryLargestPossibleK > largestPossibleK)
-            largestPossibleK = temporaryLargestPossibleK;
-
         System.out.println("The largest possible k is : " + largestPossibleK);
     }
 }
