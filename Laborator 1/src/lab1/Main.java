@@ -10,11 +10,13 @@ public class Main {
     public static void main(String[] args) {
         Main lab1 = new Main();
         lab1.compulsory();
-        String[] fakeArgs = {"10","4","A","B","C","D","E","F","G","H"};
-        lab1.homework(fakeArgs);
+        long startTime = System.nanoTime();
+        lab1.homework(args);
+        long endTime = System.nanoTime();
+        System.out.println(endTime - startTime);
     }
 
-    void compulsory(){
+    void compulsory() {
         //1.Display on the screen the message "Hello World!". Run the application. If it works, go to step 2 :)
         System.out.println("Hello World");
 
@@ -57,9 +59,8 @@ public class Main {
 
         //n = result;
 
-        while(n>9) // CIFRA DE CONTROL
-        {
-            n=n/10+n%10;
+        while (n > 9) { // CIFRA DE CONTROL
+            n = n / 10 + n % 10;
         }
 
         System.out.println(n);
@@ -71,69 +72,77 @@ public class Main {
     }
 
 
-    void homework(String[] args){
+    void homework(String[] args) {
         // Let n, p be two integers and C1,...,Cm a set of letters (the alphabet), all given as a command line arguments. Validate the arguments!
         int n;
-        if(args[0].contains(".") || args[0].contains("-") || args[0].matches("[a-zA-Z]+")){
+
+        if (args.length < 3) {
+            System.out.println("Not enough arguments");
+            return;
+        }
+
+        if (!args[0].matches("[0-9]+")) {
             System.out.println("The input for the variabile n is invalid");
             return;
         }
         n = Integer.parseInt(args[0]);
 
         int p;
-        if(args[1].contains(".") || args[1].contains("-") || args[1].matches("[a-zA-Z]+")){
+        if (!args[1].matches("[0-9]+")) {
             System.out.println("The input for the variabile p is invalid");
             return;
         }
+
         p = Integer.parseInt(args[1]);
 
         String[] alphabet = Arrays.copyOfRange(args, 2, args.length);
-
-        ArrayList<String> setOfLetters = new ArrayList<>();
+        String[] setOfLetters = new String[alphabet.length];
         for (int i = 0; i < alphabet.length; i++) {
-            boolean letterFound = false;
-            do {
-                String letter= alphabet[i];
-                if (Character.isLetter(letter.charAt(0))) {
-                    if (setOfLetters.contains((letter)) == false) {
-                        setOfLetters.add(letter);
-                        letterFound = true;
-                    }
-                } else{
-                    System.out.print("The input is not a letter, try again ");
-                    return;
-                }
+            setOfLetters[i] = "";
+        }
 
-            } while (letterFound == false);
+        for (int i = 0; i < alphabet.length; i++) {
+            String letter = alphabet[i];
+            if (Character.isLetter(letter.charAt(0))) {
+                if (Arrays.stream(setOfLetters).noneMatch(letter::equals)) {
+                    setOfLetters[i] = letter;
+                }
+            } else {
+                System.out.print("The input is not a letter, try again ");
+                return;
+            }
         }
 
         //Create an array of n strings (called words), each word containing exactly p characters from the given alphabet.
         //Display on the screen the generated array.
-        ArrayList<StringBuilder> words = new ArrayList<StringBuilder>();
+        String[] words = new String[n];
+        for (int i = 0; i < n; i++) {
+            words[i] = "";
+        }
+
         for (int i = 0; i < n; i++) {
             Random rand = new Random();
-            StringBuilder word = new StringBuilder();
+            String word = "";
             for (int j = 0; j < p; j++) {
-                int k = rand.nextInt(setOfLetters.size());
-                word.append(setOfLetters.get(k));
+                int k = rand.nextInt(setOfLetters.length);
+                word = word.concat(setOfLetters[k]);
             }
-            words.add(word);
+            words[i] = word;
         }
-        for (int i = 0; i < words.size(); i++)
-            System.out.println(words.get(i));
+
+        for (int i = 0; i < words.length; i++)
+            System.out.println(words[i]);
 
         //Two words are neighbors if they have a common letter.
         //Create a boolean n x n matrix, representing the adjacency relation of the words.
         //Create a data structure (using arrays) that stores the neighbors of each word. Display this data structure on the screen.
         boolean adjacency[][] = new boolean[n][n];
         for (int i = 0; i < n; i++) {
-            StringBuilder copyOfWord = words.get(i);
             for (int j = 0; j < n; j++) {
-                StringBuilder copyOfNextWord = words.get(j);
                 boolean areNeighbours = false;
-                for (int t = 0; t < copyOfWord.length() && !areNeighbours; t++) {
-                    for (int s = 0; s < copyOfNextWord.length() && !areNeighbours; s++) {
-                        if (copyOfWord.charAt(t) == copyOfNextWord.charAt(s))
+                for (int t = 0; t < words[i].length() && !areNeighbours; t++) {
+                    for (int s = 0; s < words[j].length() && !areNeighbours; s++) {
+                        if (words[i].charAt(t) == words[j].charAt(s))
                             areNeighbours = true;
                     }
                 }
@@ -153,21 +162,25 @@ public class Main {
         }
         //Create a data structure (using arrays) that stores the neighbors of each word. Display this data structure on the screen.
         String[] neighbours = new String[n];
-        for(int i=0; i<words.size(); i++){
+        for (int i = 0; i < words.length; i++) {
             neighbours[i] = "";
         }
 
-        for(int i=0; i<words.size(); i++){
-            for(int j=0; j<adjacency[i].length; j++){
-                if(adjacency[i][j] == true && i!=j){
-                    neighbours[i] = neighbours[i].concat(words.get(j).toString()).concat(",");
+
+        for (int i = 0; i < words.length; i++) {
+            boolean foundNeighbour = false;
+            for (int j = 0; j < words.length; j++) {
+                if (adjacency[i][j] == true && i != j) {
+                    neighbours[i] = neighbours[i].concat(words[j].toString()).concat(",");
+                    foundNeighbour = true;
                 }
             }
-            neighbours[i] = neighbours[i].substring(0,neighbours[i].length()-1); // Removing the last comma
+            if (foundNeighbour)
+                neighbours[i] = neighbours[i].substring(0, neighbours[i].length() - 1); // Removing the last comma
         }
 
-        for(int i=0; i<neighbours.length;i++){
-            System.out.println("The neighbours for " + words.get(i) + " are : " + neighbours[i]);
+        for (int i = 0; i < neighbours.length; i++) {
+            System.out.println("The neighbours for " + words[i] + " are : " + neighbours[i]);
         }
 
 
@@ -176,15 +189,15 @@ public class Main {
         int temporaryLargestPossibleK = 1;
         int largestPossibleK = 1;
         int lastPos = 0;
-        for(int i=0;i<(n-1);i++){
-            if(adjacency[i][i+1] == true)
+        for (int i = 0; i < (n - 1); i++) {
+            if (adjacency[i][i + 1] == true)
                 temporaryLargestPossibleK++;
-            else{
+            else {
                 if (temporaryLargestPossibleK > largestPossibleK)
                     largestPossibleK = temporaryLargestPossibleK;
                 temporaryLargestPossibleK = 1;
             }
-            lastPos = i+1;
+            lastPos = i + 1;
         }
         // We need to check again
         if (temporaryLargestPossibleK > largestPossibleK)
@@ -193,25 +206,20 @@ public class Main {
         // The same idea for the case W_k+1 = W_1
 
         boolean ok = true;
-        if(largestPossibleK!=n) {
-            for(int i=0;i<(n-1) && ok;i++)
-            {
-                if(adjacency[lastPos][i] == true)
+        if (largestPossibleK != n) {
+            for (int i = 0; i < (n - 1) && ok; i++) {
+                if (adjacency[lastPos][i] == true)
                     temporaryLargestPossibleK++;
-                else{
+                else {
                     if (temporaryLargestPossibleK > largestPossibleK)
                         largestPossibleK = temporaryLargestPossibleK;
                     else
                         ok = false;
                     temporaryLargestPossibleK = 1;
                 }
-                lastPos=i;
+                lastPos = i;
             }
         }
-        
-        // We need to check again
-        if (temporaryLargestPossibleK > largestPossibleK)
-            largestPossibleK = temporaryLargestPossibleK;
 
         // We need to check again
         if (temporaryLargestPossibleK > largestPossibleK)
