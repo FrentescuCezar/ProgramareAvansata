@@ -188,8 +188,22 @@ public class Main {
         //Can you find the largest possible k?
         int temporaryLargestPossibleK = 1;
         int largestPossibleK = 1;
+        int firstPossibleK = 1;
         int lastPos = 0;
-        for (int i = 0; i < (n - 1); i++) {
+
+        int i = 0;
+        while (i < (n - 1)) {
+            if (adjacency[i][i + 1] == true)
+                temporaryLargestPossibleK++;
+            else {
+                largestPossibleK = temporaryLargestPossibleK;
+                firstPossibleK = temporaryLargestPossibleK;
+                break;
+            }
+            i++;
+        }
+
+        for (; i < (n - 1); i++) {
             if (adjacency[i][i + 1] == true)
                 temporaryLargestPossibleK++;
             else {
@@ -197,31 +211,31 @@ public class Main {
                     largestPossibleK = temporaryLargestPossibleK;
                 temporaryLargestPossibleK = 1;
             }
-            lastPos = i + 1;
         }
         // We need to check again
         if (temporaryLargestPossibleK > largestPossibleK)
             largestPossibleK = temporaryLargestPossibleK;
 
-        // The same idea for the case W_k+1 = W_1
-
-        boolean ok = true;
-        if (largestPossibleK != n) {
-            for (int i = 0; i < (n - 1) && ok; i++) {
-                if (adjacency[lastPos][i] == true)
-                    temporaryLargestPossibleK++;
-                else {
-                    if (temporaryLargestPossibleK > largestPossibleK)
-                        largestPossibleK = temporaryLargestPossibleK;
-                    else
-                        ok = false;
-                    temporaryLargestPossibleK = 1;
-                }
-                lastPos = i;
-            }
+        // For the case W_k+1 = W_1
+        if (adjacency[i][0] == true) {
+            temporaryLargestPossibleK += firstPossibleK;
+            if (temporaryLargestPossibleK > largestPossibleK)
+                largestPossibleK = temporaryLargestPossibleK;
         }
+        if (largestPossibleK >= 3)
+            System.out.println("The largest possible k is : " + largestPossibleK);
+        else
+            System.out.println("The largest possible k is not greater or equal to 3");
+        /*
+        Example for these random words :
+        gA
+        in
+        cf
+        mA
+        hA
+        The biggest k is 3, why?  gA = 1 .... mA,hA = 2   and then   mA + hA + gA = 3
+        */
 
-        System.out.println("The largest possible k is : " + largestPossibleK);
     }
 }
 
