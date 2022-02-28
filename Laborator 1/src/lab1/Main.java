@@ -217,7 +217,7 @@ public class Main {
             largestPossibleK = temporaryLargestPossibleK;
 
         // For the case W_k+1 = W_1
-        if (adjacency[i][0] == true) {
+        if (adjacency[i][0] == true && largestPossibleK != n) {
             temporaryLargestPossibleK += firstPossibleK;
             if (temporaryLargestPossibleK > largestPossibleK)
                 largestPossibleK = temporaryLargestPossibleK;
