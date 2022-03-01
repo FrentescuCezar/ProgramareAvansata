@@ -1,7 +1,9 @@
+import java.util.Objects;
+
 public class Room {
-    String name;
-    Type type;
-    int capacity;
+    private String name;
+    private Type type;
+    private int capacity;
 
 
     Room(String name, int capacity, Type type) {
@@ -38,8 +40,9 @@ public class Room {
     public String toString() {
         return name + "(cap=" + capacity + ", " + type + ")";
     }
+
+    public enum Type {
+        COMPUTERLAB, LECTUREHALL;
+    }
 }
 
-enum Type {
-    COMPUTERLAB, LECTUREHALL;
-}

@@ -18,10 +18,10 @@ public class Main {
             System.out.println(event);
         }
 
-        Room r401 = new Room("401", 30, Type.COMPUTERLAB);
-        Room r403 = new Room("403", 30, Type.COMPUTERLAB);
-        Room r405 = new Room("405", 30, Type.COMPUTERLAB);
-        Room r309 = new Room("309", 100, Type.LECTUREHALL);
+        Room r401 = new Room("401", 30, Room.Type.COMPUTERLAB);
+        Room r403 = new Room("403", 30, Room.Type.COMPUTERLAB);
+        Room r405 = new Room("405", 30, Room.Type.COMPUTERLAB);
+        Room r309 = new Room("309", 100, Room.Type.LECTUREHALL);
 
         ArrayList<Room> allRooms = new ArrayList<>();
         allRooms.add(r401);

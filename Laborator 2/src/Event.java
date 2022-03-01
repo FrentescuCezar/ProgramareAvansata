@@ -1,8 +1,8 @@
 public class Event {
-    String name;
-    int size;
-    int start;
-    int end;
+    private String name;
+    private int size;
+    private int start;
+    private int end;
 
     Event(String name, int size, int start, int end) {
         this.name = name;
