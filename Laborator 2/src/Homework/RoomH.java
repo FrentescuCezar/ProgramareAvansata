@@ -1,12 +1,12 @@
-import java.util.Objects;
+package Homework;
 
-public class Room {
+class RoomH {
     private String name;
     private Type type;
     private int capacity;
 
 
-    Room(String name, int capacity, Type type) {
+    RoomH(String name, int capacity, Type type) {
         this.name = name;
         this.capacity = capacity;
         this.type = type;
