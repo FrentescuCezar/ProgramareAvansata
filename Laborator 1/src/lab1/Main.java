@@ -136,6 +136,7 @@ public class Main {
         //Two words are neighbors if they have a common letter.
         //Create a boolean n x n matrix, representing the adjacency relation of the words.
         //Create a data structure (using arrays) that stores the neighbors of each word. Display this data structure on the screen.
+
         boolean adjacency[][] = new boolean[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -196,7 +197,8 @@ public class Main {
             if (adjacency[i][i + 1] == true)
                 temporaryLargestPossibleK++;
             else {
-                largestPossibleK = temporaryLargestPossibleK;
+                if(temporaryLargestPossibleK > largestPossibleK)
+                    largestPossibleK = temporaryLargestPossibleK;
                 firstPossibleK = temporaryLargestPossibleK;
                 break;
             }
