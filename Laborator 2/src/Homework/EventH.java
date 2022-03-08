@@ -1,19 +1,22 @@
 package Homework;
 
-class EventH {
+import java.util.Objects;
+
+public class EventH {
     private String name;
     private int size;
     private int start;
     private int end;
 
-    EventH(String name, int size, int start, int end) {
+    public EventH(String name, int size, int start, int end) {
         this.name = name;
         this.size = size;
         this.end = end;
     }
 
     public String getName() {
-        return name; }
+        return name;
+    }
 
     public int getSize() {
         return size;
@@ -46,5 +49,13 @@ class EventH {
     @Override
     public String toString() {
         return name + "(size=" + size + ", start=" + start + ", end=" + end + ")";
+    }
+
+    @Override
+    public boolean equals(Object event) {
+        if (this == event) return true;
+        if (event == null || getClass() != event.getClass()) return false;
+        EventH eventH = (EventH) event;
+        return size == eventH.size && start == eventH.start && end == eventH.end && name.equals(eventH.name);
     }
 }

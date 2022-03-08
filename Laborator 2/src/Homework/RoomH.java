@@ -1,23 +1,19 @@
 package Homework;
 
-class RoomH {
+import java.util.Objects;
+
+public abstract class RoomH {
     private String name;
-    private Type type;
     private int capacity;
+    private boolean isOccupied;
 
-
-    RoomH(String name, int capacity, Type type) {
+    public RoomH(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
-        this.type = type;
     }
 
     public String getName() {
         return name;
-    }
-
-    public Type getType() {
-        return type;
     }
 
     public int getCapacity() {
@@ -28,21 +24,21 @@ class RoomH {
         this.name = name;
     }
 
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
     @Override
     public String toString() {
-        return name + "(cap=" + capacity + ", " + type + ")";
+        return name + "(cap=" + capacity + ", " + getClass().getName() + ")" ;
     }
 
-    public enum Type {
-        COMPUTERLAB, LECTUREHALL;
+    @Override
+    public boolean equals(Object room) {
+        if (this == room) return true;
+        if (room == null || getClass() != room.getClass()) return false;
+        RoomH roomH = (RoomH) room;
+        return capacity == roomH.capacity && Objects.equals(name, roomH.name);
     }
 }
 
