@@ -10,6 +10,7 @@ public class EventH {
 
     public EventH(String name, int size, int start, int end) {
         this.name = name;
+        this.start = start;
         this.size = size;
         this.end = end;
     }

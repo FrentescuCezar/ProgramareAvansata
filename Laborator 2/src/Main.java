@@ -58,5 +58,11 @@ public class Main {
         problem.addRoom(r304);
 
         System.out.println("\n" + problem);
+
+        Solution solution = new Solution();
+        solution.setProblem(problem);
+        solution.getSolution();
+
+
     }
 }

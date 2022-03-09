@@ -2,10 +2,14 @@ package Homework;
 
 public class Solution {
     private Problem problem = new Problem();
-    private RoomH[] rooms;
+    private RoomH[] assignedRooms;
 
     public void setProblem(Problem problem) {
-        problem = problem;
-        rooms = new RoomH[problem.allEvents.length];
+        this.problem = problem;
+        this.assignedRooms = new RoomH[problem.allEvents.length];
+    }
+
+    public void getSolution() {
+        Algorithm.assignEventToRoom(problem, assignedRooms);
     }
 }
