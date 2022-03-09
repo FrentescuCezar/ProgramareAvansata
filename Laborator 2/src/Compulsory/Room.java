@@ -12,6 +12,7 @@ public class Room {
         this.name = name;
         this.capacity = capacity;
         this.type = type;
+        numberOfRooms++;
     }
 
     public String getName() {

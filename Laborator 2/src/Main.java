@@ -5,9 +5,9 @@ import Homework.*;
 public class Main {
     public static void main(String[] args) {
         Main compulsory = new Main();
-        compulsory.compulsory();
+        //compulsory.compulsory();
 
-
+        compulsory.homework();
     }
 
     void compulsory() {
@@ -33,6 +33,30 @@ public class Main {
         for (Room room : allRooms) {
             System.out.println(room);
         }
+    }
+    void homework(){
+        EventH c1 = new EventH("C1", 100, 8, 10);
+        EventH c2 = new EventH("C2", 100, 10, 12);
+        EventH l1 = new EventH("L1", 30, 8, 10);
+        EventH l2 = new EventH("L2", 30, 8, 10);
+        EventH l3 = new EventH("L3", 30, 10, 12);
 
+        RoomH r401 = new ComputerLab("401", 30,"Windows");
+        RoomH r403 = new ComputerLab("403", 30,"Windows");
+        RoomH r405 = new ComputerLab("405", 30,"Linux");
+        RoomH r309 = new LectureHall("309", 100,true);
+
+        Problem problem = new Problem();
+
+        problem.setAllEvents(c1,c2,l1,l2,l3,l3,l3);
+        problem.setAllRooms(r401,r403,r405,r309);
+        System.out.println(problem);
+
+        EventH l4 = new EventH("L3", 30, 10, 12);
+        problem.addEvent(l4);
+        RoomH r304 = new LectureHall("304", 100,true);
+        problem.addRoom(r304);
+
+        System.out.println("\n" + problem);
     }
 }
