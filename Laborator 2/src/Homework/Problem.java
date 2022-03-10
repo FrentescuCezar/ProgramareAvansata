@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 
 /**
- * Clasa Problem va contine toate evenimentele si camerele fara duplicate.
+ * Contains all the events and classes without duplicates.
  **/
 public class Problem {
     EventH[] allEvents;
@@ -12,9 +12,10 @@ public class Problem {
 
 
     /**
-     * setAllEvent va prelua evenimente dintr-o lista si va adauga in allEvents doar evenimente unice/neduplicate.
-     * Initial se vor adauga si elemente null, cele care sunt duplicate, dar apoi se va aloca un nou array care sa stocheze doar elementele nenule.
-     * @param events
+     * It takes events from a list and it will add to "allEvents" only the events that are unique/not duplicate.
+     * Initially it will also add null values for the events that are duplicates,
+     * but then a new array is created that contains only unique elements.
+     * @param events List of events
      */
     public void setAllEvents(EventH... events) {
         EventH[] auxEvents = new EventH[events.length];
@@ -22,7 +23,7 @@ public class Problem {
         int index = 0;
         for (int i = 0; i < events.length; i++) {
             boolean duplicateEventFound = false;
-            //innermost loop to make comparision between elemnts and skip duplicate elements
+            //Loop to make comparision between events and skip duplicate events
             for (int j = 0; j < i; j++) {
                 if (events[i].equals(events[j])) {
                     duplicateEventFound = true;
@@ -35,12 +36,14 @@ public class Problem {
             }
         }
 
+        //Counting how many elements contains null values.
         int counterNotNullElements = 0;
         for (EventH event : auxEvents) {
             if (event != null)
                 counterNotNullElements++;
         }
 
+        //Creating a new array that contains all the events without duplicates.
         EventH[] auxEventsNotNull = new EventH[counterNotNullElements];
         for (int i = 0; i < auxEvents.length; i++) {
             if (auxEvents[i] != null)
@@ -51,9 +54,10 @@ public class Problem {
     }
 
     /**
-     * setAllEvent va prelua camerele dintr-o lista si va adauga in allEvents doar camerele unice/neduplicate.
-     * Initial se vor adauga si elemente null, cele care sunt duplicate, dar apoi se va aloca un nou array care sa stocheze doar elementele nenule.
-     * @param rooms
+     * It takes rooms from a list and it will add to "allRooms" only the events that are unique/not duplicate.
+     * Initially it will also add null values for the events that are duplicates,
+     * but then a new array is created that contains only unique elements.
+     * @param rooms List of rooms
      */
     public void setAllRooms(RoomH... rooms) {
         RoomH[] auxRooms = new RoomH[rooms.length];
@@ -74,12 +78,14 @@ public class Problem {
             }
         }
 
+        //Counting how many elements contains null values.
         int counterNotNullElements = 0;
         for (RoomH room : auxRooms) {
             if (room != null)
                 counterNotNullElements++;
         }
 
+        //Creating a new array that contains all the events without duplicates.
         RoomH[] auxRoomsNotNull = new RoomH[counterNotNullElements];
         for (int i = 0; i < auxRooms.length; i++) {
             if (auxRooms[i] != null)
@@ -105,9 +111,7 @@ public class Problem {
 
 
     /**
-     * setAllEvent va prelua camerele dintr-o lista si va adauga in allEvents doar camerele unice/neduplicate.
-     * Initial se vor adauga si elemente null, cele care sunt duplicate, dar apoi se va aloca un nou array care sa stocheze doar elementele nenule.
-     * @param room
+     * It adds a new room to the allRooms array, only if the room was not added previously.
      */
     public void addRoom(RoomH room) {
         RoomH[] auxRooms = new RoomH[allRooms.length + 1];

@@ -4,10 +4,10 @@ import Homework.*;
 
 public class Main {
     public static void main(String[] args) {
-        Main compulsory = new Main();
+        Main Lab3 = new Main();
         //compulsory.compulsory();
 
-        compulsory.homework();
+        Lab3.homework();
     }
 
     void compulsory() {

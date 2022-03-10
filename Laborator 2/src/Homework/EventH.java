@@ -2,6 +2,9 @@ package Homework;
 
 import java.util.Objects;
 
+/**
+ * Represents an event which is going to have a room assigned to it.
+ */
 public class EventH {
     private String name;
     private int size;
