@@ -1,4 +1,4 @@
-<p style="color: #2e6c80;" data-darkreader-inline-color=""><a title="Link Laborator 1" href="https://profs.info.uaic.ro/~acf/java/labs/lab_01.html" target="_blank">Link Laborator 1</a></p>
+<p style="color: #2e6c80;" data-darkreader-inline-color=""><a title="Link Laborator 2" href="https://profs.info.uaic.ro/~acf/java/labs/lab_02.html" target="_blank">Link Laborator 2</a></p>
 <h1 style="color: #5e9ca0;" data-darkreader-inline-color="">Laborator 1</h1>
 <details>
   <summary>Comuplsory (1p) (OPEN)</summary>
