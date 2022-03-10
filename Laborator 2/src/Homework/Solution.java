@@ -10,6 +10,6 @@ public class Solution {
     }
 
     public void getSolution() {
-        Algorithm.assignEventToRoom(problem, assignedRooms);
+        Algorithm.assignEventsToRooms(problem, assignedRooms);
     }
 }

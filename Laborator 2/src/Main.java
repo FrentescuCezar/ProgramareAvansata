@@ -50,14 +50,11 @@ public class Main {
 
         problem.setAllEvents(c1,c2,l1,l2,l3,l3,l3);
         problem.setAllRooms(r401,r403,r405,r309);
-        System.out.println(problem);
 
         EventH l4 = new EventH("L3", 30, 10, 12);
-        problem.addEvent(l4);
+        problem.addEvent(l4); // Doesn't Work because it's the same event
         RoomH r304 = new LectureHall("304", 100,true);
-        problem.addRoom(r304);
-
-        System.out.println("\n" + problem);
+        problem.addRoom(r304); // Works because it's a different room
 
         Solution solution = new Solution();
         solution.setProblem(problem);

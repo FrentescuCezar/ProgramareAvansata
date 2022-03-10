@@ -1,7 +1,7 @@
 package Homework;
 
 public abstract class Algorithm {
-    protected static void assignEventToRoom(Problem problem, RoomH[] assignedRooms) {
+    protected static void assignEventsToRooms(Problem problem, RoomH[] assignedRooms) {
         orderEventsBySizeDesc(problem);
         orderRoomsByCapacityDesc(problem);
 
@@ -20,11 +20,7 @@ public abstract class Algorithm {
             }
         }
 
-        System.out.println(problem);
-
-        for (RoomH room : assignedRooms) {
-            System.out.println(room);
-        }
+        printEventsAssignedToRooms(problem,assignedRooms);
     }
 
     private static boolean isRoomAvailable(int eventIndex, int roomIndex, Problem problem, RoomH[] assignedRooms) {
@@ -33,23 +29,24 @@ public abstract class Algorithm {
         for (int i = 0; i < assignedRooms.length; i++) {
             boolean theRoomsNameAreEqual;
 
-            if(assignedRooms[i] != null && assignedRooms[roomIndex] != null){
+            if (assignedRooms[i] != null && assignedRooms[roomIndex] != null) {
                 theRoomsNameAreEqual = assignedRooms[i].getName().equals(assignedRooms[roomIndex].getName());
                 if (theRoomsNameAreEqual) {
 
                     if (event[i].getStart() == event[eventIndex].getStart() || event[i].getEnd() == event[eventIndex].getEnd())
-                        return false; // [8,10] [8,10]
+                        return false; // [8,10] = [8,10]
 
                     if (event[i].getStart() < event[eventIndex].getStart())
                         if (event[i].getEnd() > event[eventIndex].getEnd())
-                            return false; // [8,14] [10,12]
+                            return false; // [8,14] <- [10,12]
 
                     if (event[i].getStart() > event[eventIndex].getStart())
                         if (event[i].getEnd() < event[eventIndex].getEnd())
-                            return false; // [10,12] [8,14]
+                            return false; // [10,12] -> [8,14]
                 }
             }
         }
+
         return true;
     }
 
@@ -63,6 +60,7 @@ public abstract class Algorithm {
                     problem.allEvents[j + 1] = temp;
                 }
     }
+
     private static void orderRoomsByCapacityDesc(Problem problem) {
         int n = problem.allRooms.length;
         for (int i = 0; i < n - 1; i++)
@@ -74,4 +72,8 @@ public abstract class Algorithm {
                 }
     }
 
+    private static void printEventsAssignedToRooms(Problem problem, RoomH[] assignedRooms){
+        for (int i = 0; i < problem.allEvents.length; i++)
+            System.out.println(problem.allEvents[i].getName() + "->" + assignedRooms[i].getName());
+    }
 }
