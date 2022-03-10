@@ -1,5 +1,5 @@
 <p style="color: #2e6c80;" data-darkreader-inline-color=""><a title="Link Laborator 2" href="https://profs.info.uaic.ro/~acf/java/labs/lab_02.html" target="_blank">Link Laborator 2</a></p>
-<h1 style="color: #5e9ca0;" data-darkreader-inline-color="">Laborator 1</h1>
+<h1 style="color: #5e9ca0;" data-darkreader-inline-color="">Laborator 2</h1>
 <details>
   <summary>Comuplsory (1p) (OPEN)</summary>
   <h2 style="color: #2e6c80;" data-darkreader-inline-color=""><strong>Compulsory</strong>&nbsp;(1p)</h2>
