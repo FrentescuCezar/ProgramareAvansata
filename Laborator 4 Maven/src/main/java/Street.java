@@ -1,6 +1,6 @@
-public class Street {
+public class Street implements Comparable<Street> {
     private String name;
-    private int length;
+    private Integer length;
     private Intersection firstIntersection;
     private Intersection secondIntersection;
 
@@ -21,23 +21,25 @@ public class Street {
         return firstIntersection;
     }
 
-    public Intersection getSecondIntersection() {
-        return secondIntersection;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
     public void setFirstIntersection(Intersection firstIntersection) {
         this.firstIntersection = firstIntersection;
     }
 
+    public Intersection getSecondIntersection() {
+        return secondIntersection;
+    }
+
     public void setSecondIntersection(Intersection secondIntersection) {
         this.secondIntersection = secondIntersection;
+    }
+
+    @Override
+    public int compareTo(Street other) {
+        return this.length.compareTo(other.length);
+    }
+
+    @Override
+    public String toString() {
+        return "Street has " + "the name '" + name + '\'' + ", and the length " + length  + "\n";
     }
 }

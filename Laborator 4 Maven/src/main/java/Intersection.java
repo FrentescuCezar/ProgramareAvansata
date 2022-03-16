@@ -1,4 +1,5 @@
 public class Intersection {
+
     private String name;
 
     public Intersection(String name) {
@@ -11,6 +12,6 @@ public class Intersection {
 
     @Override
     public String toString() {
-        return "Intersection has" + " the name '" + name + '\'' + "\n";
+        return  "Intersection has " + "the name '" + name + '\'' + "\n";
     }
 }
