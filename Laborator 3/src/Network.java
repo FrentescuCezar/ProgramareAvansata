@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,8 +15,7 @@ public class Network {
     }
 
     public void addNodes(Node ... listOfNodes) {
-        for(int i = 0 ;i<listOfNodes.length;i++)
-            nodes.add(listOfNodes[i]);
+        nodes.addAll(Arrays.asList(listOfNodes));
     }
 
     public void sortNodes() {
