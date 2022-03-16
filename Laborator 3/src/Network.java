@@ -24,6 +24,8 @@ public class Network {
 
     @Override
     public String toString() {
-        return "The " + "Nodes of Network are :  \n " + nodes + ' ';
+        Collections.sort(nodes);
+        return "Locations are: " + nodes ;
+
     }
 }

@@ -4,6 +4,7 @@ public class Router extends Node implements Identifiable {
 
     public Router(String name, String address) {
         super(name);
+        this.address = address;
     }
 
     public void setAddress(String address) {
