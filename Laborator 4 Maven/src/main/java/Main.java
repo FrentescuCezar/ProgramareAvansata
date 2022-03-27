@@ -1,39 +1,55 @@
+import com.github.javafaker.Faker;
+
 import java.util.*;
 import java.util.stream.IntStream;
+
 
 public class Main {
     public static void main(String[] args) {
 
+        Faker faker = new Faker();
+
         List<Street> streets = new LinkedList<>();
-        Set<Intersection> intersections = new HashSet<>();
 
-        List<Intersection> vertices = Arrays.asList(IntStream.range(1, 10)
-                .mapToObj(i -> new Intersection("intersection" + i)).toArray(Intersection[]::new));
-
-        List<Intersection> vertices2 = Arrays.asList(IntStream.range(1, 10)
-                .mapToObj(i -> new Intersection("intersection" + i)).toArray(Intersection[]::new));
+        List<Intersection> vertices = Arrays.asList(IntStream.range(0, 19)
+                .mapToObj(i -> new Intersection(faker.address().streetSuffix())).toArray(Intersection[]::new));
+        Set<Intersection> intersections = new HashSet<>(vertices);
 
 
-        List<Street> nodes1 = Arrays.asList(IntStream.range(0, 6).mapToObj(i -> new Street("street" + i, 1))
-                .toArray(Street[]::new));
-        List<Street> nodes2 = Arrays.asList(IntStream.range(0, 7).mapToObj(i -> new Street("street" + i, 2))
-                .toArray(Street[]::new));
-        List<Street> nodes3 = Arrays.asList(IntStream.range(0, 3).mapToObj(i -> new Street("street" + i, 3))
-                .toArray(Street[]::new));
+        for (int i = 0; i < 6; i++) {
+            Set<Intersection> auxIntersections = new HashSet<>();
+            auxIntersections.add(vertices.get(i));
+            auxIntersections.add(vertices.get(i+1));
+            streets.add(new Street(faker.address().streetName(), 1, auxIntersections));
+        }
 
-        intersections.addAll(vertices);
-
-        streets.addAll(nodes1);
-        streets.addAll(nodes3);
-        streets.addAll(nodes2);
+        for (int i = 7; i < 15; i++) {
+            Set<Intersection> auxIntersections = new HashSet<>();
+            auxIntersections.add(vertices.get(i));
+            auxIntersections.add(vertices.get(i+1));
+            streets.add(new Street(faker.address().streetName(), 2, auxIntersections));
+        }
+//
+//
+        for (int i = 15; i < 18; i++) {
+            Set<Intersection> auxIntersections = new HashSet<>();
+            auxIntersections.add(vertices.get(i));
+            auxIntersections.add(vertices.get(i+1));
+            streets.add(new Street(faker.address().streetName(), 3, auxIntersections));
+        }
 
         streets.sort(Comparator.comparing(street -> street.getLength()));
-        // or method reference streets.sort(Comparator.comparing(Street::getLength));
+        // Or Method Reference streets.sort(Comparator.comparing(Street::getLength));
 
         intersections.addAll(vertices); // We see that the Set property doesn't duplicate the same vertices twice.
+        /*OR THIS METHOD
+        if (intersections.size() != vertices.size())
+            System.out.println("Duplicates");
+        */
 
-        System.out.println(intersections);
-        System.out.println(streets);
 
+        City city = new City(intersections, streets);
+
+        System.out.println(city.query(1));
     }
 }

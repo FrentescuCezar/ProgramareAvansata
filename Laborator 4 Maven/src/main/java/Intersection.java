@@ -12,6 +12,6 @@ public class Intersection {
 
     @Override
     public String toString() {
-        return  "Intersection has " + "the name '" + name + '\'' + "\n";
+        return  name + " ";
     }
 }

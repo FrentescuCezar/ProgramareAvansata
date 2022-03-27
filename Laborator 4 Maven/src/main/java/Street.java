@@ -1,12 +1,15 @@
+import java.util.*;
+
 public class Street implements Comparable<Street> {
     private String name;
     private Integer length;
-    private Intersection firstIntersection;
-    private Intersection secondIntersection;
+    private Set<Intersection> intersectionsList;
 
-    public Street(String name, int length) {
+
+    public Street(String name, int length, Set<Intersection> auxIntersections) {
         this.name = name;
         this.length = length;
+        intersectionsList = auxIntersections;
     }
 
     public String getName() {
@@ -17,20 +20,8 @@ public class Street implements Comparable<Street> {
         return length;
     }
 
-    public Intersection getFirstIntersection() {
-        return firstIntersection;
-    }
-
-    public void setFirstIntersection(Intersection firstIntersection) {
-        this.firstIntersection = firstIntersection;
-    }
-
-    public Intersection getSecondIntersection() {
-        return secondIntersection;
-    }
-
-    public void setSecondIntersection(Intersection secondIntersection) {
-        this.secondIntersection = secondIntersection;
+    public Set<Intersection> getIntersectionsList() {
+        return intersectionsList;
     }
 
     @Override
@@ -40,6 +31,7 @@ public class Street implements Comparable<Street> {
 
     @Override
     public String toString() {
-        return "Street has " + "the name '" + name + '\'' + ", and the length " + length  + "\n";
+        return "Street has " + "the name '" + name + '\'' + ", with the length of " + length  + "\n"
+                + "The Intersections are : " + intersectionsList + "\n";
     }
 }
