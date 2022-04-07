@@ -35,11 +35,10 @@ public class Main {
         allCommands.add(listCommand);
         allCommands.add(viewCommand);
         allCommands.add(reportCommand);
-
-        infoCommand.execute();
+        allCommands.add(infoCommand);
 
         for(Command command : allCommands){
-            //command.execute();
+            command.execute();
         }
     }
 }
